@@ -1,6 +1,11 @@
 /* src/App.css */
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 
+.App {
+  min-height: 100vh; /* This makes sure your app covers at least the full view height but can grow */
+  overflow-y: auto; /* Ensures scrolling is enabled if content overflows */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -110,16 +115,21 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
     }
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Additional styles for your hero section */
 .hero {
+  min-height: 100vh;  /* Covers the full viewport height */
+  width: 100%;        /* Covers the full viewport width */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  text-align: center;
-  padding: 0 15px;
-  flex-direction: column; /* Stack items vertically */
 }
-
 .welcome-text h1 {
   font-size: 3rem; /* Adjust font size as needed */
   margin-bottom: 2rem; /* Add space below the heading */
@@ -168,4 +178,28 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
   width: 36px;
   height: 36px;
   animation: rotate 2s linear infinite;
+}
+
+.additional-content {
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.info-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.learn-more-button {
+  display: block;
+  width: 200px;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
