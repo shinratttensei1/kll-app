@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AdditionalContent from './components/AdditionalContent';
+import DataFetcher from './components/DataFetcher';  // Make sure this is imported
 import ReadingContent from './components/ReadingContent';  // Make sure this is imported
 import './App.css';
+import Footer from './components/Footer';
 
 function App() {
     return (
@@ -15,7 +17,8 @@ function App() {
                     <Route path="/" element={
                       <>
                         <Hero />
-                        <AdditionalContent /> {/* Now included in your main page */}
+                        <Footer />
+                        <AdditionalContent /> 
                       </>
                     } />
                     <Route path="/reading" element={<ReadingContent />} />

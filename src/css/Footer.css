@@ -1,0 +1,25 @@
+.footer {
+    min-height: 10hv;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid #ddd; /* You can adjust the color as needed */
+    border-bottom: 1px solid #ddd; /* You can adjust the color as needed */
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    margin: 0 30px;
+}
+
+.language-option img {
+    width: 40px; /* Adjust size as necessary */
+    height: auto;
+    margin-right: 8px;
+}
+
+.language-option span {
+    font-size: 16px; /* Adjust size as necessary */
+}

@@ -1,7 +1,6 @@
-// src/components/ReadingContent.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ReadingContent.css'; 
+import '../css/ReadingContent.css'; 
 function ReadingContent() {
     const [questions, setQuestions] = useState([]);
     const [selectedOption, setSelectedOption] = useState('');
@@ -11,20 +10,33 @@ function ReadingContent() {
 
     useEffect(() => {
         // Optionally, automatically fetch questions on component mount
-        // fetchQuestions();
+        fetchQuestions();
     }, []);
 
     const fetchQuestions = async () => {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await axios.get('https://hacknu24.onrender.com/reading');
-
+            const response = await axios.get('https://hacknu24.onrender.com/reading')
+            
             //for debug purpose only, show the response data to text
             setQuestions(response.data);
         } catch (error) {
             console.error('Error fetching questions:', error);
-            setError(error.toString());
+            // Capture more detailed error information
+            let errorInfo = '';
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                errorInfo = `Server responded with status: ${error.response.status}`;
+            } else if (error.request) {
+                // The request was made but no response was received
+                errorInfo = 'No response received';
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                errorInfo = error.message;
+            }
+            setError(`Error: ${errorInfo}`);
         } finally {
             setIsLoading(false);
         }
@@ -32,9 +44,6 @@ function ReadingContent() {
 
 
 
-    if (isLoading) {
-        return <div className="center-container">Loading...</div>;
-    }
 
     if (error) {
         return (
@@ -49,15 +58,19 @@ function ReadingContent() {
 
     if (questions.length === 0) {
         return (
-            <div className="center-container">
-                <div>No questions found.</div>
-                <button onClick={fetchQuestions} disabled={isLoading}>
-                    {isLoading ? 'Fetching...' : 'Fetch Questions'}
-                </button>
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
             </div>
         );
     }
 
+    if (isLoading) {
+        return (
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+            </div>
+        );
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -76,41 +89,39 @@ function ReadingContent() {
         }
     };
 
-    // Show loading spinner while fetching questions
-    // if (isLoading) {
-    //     return (
-    //         <div className="loading-container">
-    //             <div className="loading-spinner"></div>
-    //         </div>
-    //     );
-    // }
+
 
     const currentQuestion = questions[currentQuestionIndex];
     return (
-        <div className="reading-content">
-            <h2>Reading Practice</h2>
-            <div className="reading-passage">
-                <p>{currentQuestion.text}</p>
-            </div>
-
-            <form onSubmit={handleSubmit}>
-                <p>{currentQuestion.questions}</p>
-                {currentQuestion.options.map((option, index) => (
-                    <div key={index}>
-                        <input 
-                          type="radio" 
-                          id={`choice${index}`} 
-                          name="answer" 
-                          value={option} 
-                          checked={selectedOption === option} 
-                          onChange={(e) => setSelectedOption(e.target.value)} 
-                        />
-                        <label htmlFor={`choice${index}`}>{String.fromCharCode(65 + index)} {option}</label>
-                    </div>
-                ))}
-                <button type="submit">Submit Answer</button>
-            </form>
+    <div className="reading-content">
+        <h2 className="reading-header">Reading Practice</h2>
+        <div className="reading-passage">
+            <p>{currentQuestion.text}</p>
         </div>
+
+    <form onSubmit={handleSubmit} className="question-form">
+        <fieldset>
+            <legend className="question-text">{currentQuestion.question}</legend>
+            {currentQuestion.options.map((option, index) => (
+                <div className="option-container" key={index}>
+                    <input 
+                      type="radio" 
+                      id={`choice${index}`}
+                      name="answer"
+                      value={option}
+                      checked={selectedOption === option}
+                      onChange={(e) => setSelectedOption(e.target.value)}
+                      className="option-input"
+                    />
+                    <label htmlFor={`choice${index}`} className="option-label">
+                        {String.fromCharCode(65 + index)} {option}
+                    </label>
+                </div>
+            ))}
+        </fieldset>
+        <button type="submit" className="submit-button">Submit Answer</button>
+    </form>
+</div>
     );
 }
 

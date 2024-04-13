@@ -1,0 +1,36 @@
+/* Additional styles for your hero section */
+.hero {
+    min-height: 90vh;  /* Covers the full viewport height */
+    width: 100%;        /* Covers the full viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-text h1 {
+font-size: 3rem; /* Adjust font size as needed */
+margin-bottom: 2rem; /* Add space below the heading */
+} 
+
+.welcome-text p {
+font-size: 1.5rem; /* Adjust font size as needed */
+margin-bottom: 2rem; /* Add space below the paragraph */
+}
+
+.welcome-button {
+padding: 10px 20px;
+font-size: 1rem;
+color: white;
+background-color: #4CAF50;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+@keyframes rotate {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}

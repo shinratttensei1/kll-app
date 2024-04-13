@@ -39,81 +39,6 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
     background-color: #8167a9;
 }
 
-/* Header Styles */
-.start-header {
-  opacity: 1;
-  transform: translateY(0);
-  padding: 20px 0; /* Increased padding at the top */
-  box-shadow: none;
-  transition: all 0.3s ease-out;
-}
-
-.navigation-wrap {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    transition: all 0.3s ease-out;
-}
-
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-}
-
-.navbar-nav {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.nav-item {
-    transition: all 200ms linear;
-}
-
-.nav-link {
-    color: #212121;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 0.5rem 1.5rem;
-    transition: all 200ms linear;
-    position: relative;
-}
-
-.nav-link:hover, .nav-link:focus {
-    color: #8167a9;
-}
-
-.nav-item:after {
-    content: '';
-    display: block;
-    height: 2px;
-    width: 0;
-    background: #8167a9;
-    transition: width 0.3s;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nav-link:hover:after, .nav-item.active:after {
-    width: 100%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 992px) {
-    .navbar-nav {
-        flex-direction: column;
-    }
-    .nav-link {
-        padding: 0.3rem 1rem;
-    }
-}
 
 html, body {
   height: 100%;
@@ -122,42 +47,7 @@ html, body {
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
-/* Additional styles for your hero section */
-.hero {
-  min-height: 100vh;  /* Covers the full viewport height */
-  width: 100%;        /* Covers the full viewport width */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.welcome-text h1 {
-  font-size: 3rem; /* Adjust font size as needed */
-  margin-bottom: 2rem; /* Add space below the heading */
-} 
 
-.welcome-text p {
-  font-size: 1.5rem; /* Adjust font size as needed */
-  margin-bottom: 2rem; /* Add space below the paragraph */
-}
-
-.welcome-button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: white;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 .loading-container {
   display: flex;
@@ -178,28 +68,4 @@ html, body {
   width: 36px;
   height: 36px;
   animation: rotate 2s linear infinite;
-}
-
-.additional-content {
-  padding: 20px;
-  background-color: #f0f0f0;
-}
-
-.info-section {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.learn-more-button {
-  display: block;
-  width: 200px;
-  margin: 20px auto;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
 }
