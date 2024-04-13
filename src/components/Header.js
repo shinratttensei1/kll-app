@@ -1,19 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Using NavLink for active styles
 
 function Header() {
     return (
-        <header>
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/reading">Reading Practice</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/contact">Contact</Link></li>
+        <header className="start-header navigation-wrap">
+            <nav className="navbar">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <NavLink to="/" exact className="nav-link" activeClassName="active">Home</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/reading" className="nav-link" activeClassName="active">Reading Practice</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/about" className="nav-link" activeClassName="active">About</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink to="/contact" className="nav-link" activeClassName="active">Contact</NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>
     );
 }
 
-export default Header;  // This should be a default export
+export default Header;

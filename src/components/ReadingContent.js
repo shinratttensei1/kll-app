@@ -3,18 +3,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function ReadingContent() {
-    const [questions, setQuestions] = useState([]); // State to hold the questions data
+    const [questions, setQuestions] = useState([]);
     const [selectedOption, setSelectedOption] = useState('');
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // To navigate through questions
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true); // Added loading state
 
     useEffect(() => {
-        // Function to fetch questions
         const fetchQuestions = async () => {
+            setIsLoading(true); // Begin loading
             try {
-                const response = await axios.get('URL_TO_BACKEND_API');
+                const response = await axios.get('https://hacknu24.onrender.com/reading');
                 setQuestions(response.data);
+                setIsLoading(false); // Stop loading after fetching data
             } catch (error) {
                 console.error('Error fetching questions:', error);
+                setIsLoading(false); // Stop loading if an error occurs
             }
         };
 
@@ -23,7 +26,7 @@ function ReadingContent() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (questions[currentQuestionIndex].answer === selectedOption) {
+        if (questions[currentQuestionIndex]?.answer === selectedOption) {
             alert("Correct answer!");
         } else {
             alert("Wrong answer, try again!");
@@ -38,12 +41,20 @@ function ReadingContent() {
         }
     };
 
-    // Conditional rendering if data is not yet loaded
-    if (questions.length === 0) {
-        return <div>Loading questions...</div>;
+    // Show loading spinner while fetching questions
+    if (isLoading) {
+        return (
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+            </div>
+        );
     }
 
+    // Show content if not loading and questions are available
     const currentQuestion = questions[currentQuestionIndex];
+    if (!currentQuestion) {
+        return <div>No questions found.</div>;
+    }
 
     return (
         <div className="reading-content">
@@ -55,7 +66,14 @@ function ReadingContent() {
                 <p>{currentQuestion.questions}</p>
                 {currentQuestion.options.map((option, index) => (
                     <div key={index}>
-                        <input type="radio" id={`choice${index}`} name="answer" value={option} checked={selectedOption === option} onChange={(e) => setSelectedOption(e.target.value)} />
+                        <input 
+                          type="radio" 
+                          id={`choice${index}`} 
+                          name="answer" 
+                          value={option} 
+                          checked={selectedOption === option} 
+                          onChange={(e) => setSelectedOption(e.target.value)} 
+                        />
                         <label htmlFor={`choice${index}`}>{String.fromCharCode(65 + index)}) {option}</label>
                     </div>
                 ))}
